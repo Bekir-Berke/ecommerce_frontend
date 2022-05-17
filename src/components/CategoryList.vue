@@ -1,19 +1,31 @@
 <template>
-    <ul class="list-group">
-        <li class="list-group-item" v-for="(category, index) in categories" :key="index">
-            <router-link :to="{path:category}">{{category}}</router-link>
-        </li>
-    </ul>
+    <div class="category">
+        <ul class="list-group">
+            <li v-for="(category, index) in categories" :key="index" class="list-group-item">
+                <router-link :to="{path:`/category/${category.categoryName}`}">
+                    {{category.categoryName}}
+                </router-link>
+            </li>
+        </ul>
+    </div>
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 export default {
     name:'CategoryList',
-    data(){
-        return{
-            categories:[]
-        }
+    computed:{
+        ...mapState({
+        categories: state => state.categories
+        }),
     },
-
+    methods:{
+        ...mapActions({
+            getCategories:'getCategories'
+        }),
+    },
+    mounted(){
+        this.getCategories();
+    },
 }
 </script>

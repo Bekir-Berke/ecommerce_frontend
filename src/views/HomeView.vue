@@ -1,13 +1,13 @@
 <template>
   <div class="row home">
-    <div class="col-md-4">
-      <category-list></category-list>
+    <div class="col-4">
+      <CategoryList></CategoryList>
     </div>
-    <div class="col-md-4">
+    <div class="col-4">
       <product-list></product-list>
     </div>
-    <div class="col-md-4">
-      <cart/>
+    <div class="col-4">
+      <cart></cart>
     </div>
   </div>
 </template>
@@ -20,6 +20,12 @@ import Cart from '@/components/Cart.vue';
 
 export default {
   name: 'HomeView',
-  components: {ProductList, CategoryList, Cart}
+  components: { ProductList, CategoryList, Cart },
+  // mounted(){
+  //   this.$toast.success("Hocam 100 verin !!!!",{
+  //     position:"top",
+  //     duration:10000
+  //   })
+  // }
 }
 </script>

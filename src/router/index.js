@@ -6,18 +6,20 @@ import AccountView from '../views/AccountView.vue'
 import ProductDetailView from '../views/ProductDetailView.vue'
 import AdminView from '../views/AdminView.vue'
 import NotFound from '../views/NotFound.vue'
+import ProductAdd from '../views/ProductAddView.vue'
 
 const routes = [
   {
     path: '/',
     name: 'home',
     component: HomeView,
-    children:[
+    children: [
       {
-        path:':categoryName',
+        path:'category/:category',
+        name:'category',
         component:HomeView
       }
-    ]
+    ],
   },
   {
     path: '/register',
@@ -50,16 +52,23 @@ const routes = [
     component:AdminView,
     beforeEnter:(to, from, next) => {
       const auth = localStorage.getItem("isAdmin")
-      return auth ? next() : next({path:'/login'})
+      return JSON.parse(auth) === true ? next() : next({path:'/login'})
     }
   },
   {
     path:'/:pathMatch(.*)*',
+    name:'not-found',
     component:NotFound
   },
   {
     path:'/products/:id',
     component:ProductDetailView
+  },
+  {
+    path:'/admin/add',
+    name:'add',
+    component:ProductAdd,
+
   }
 ]
 
