@@ -43,11 +43,29 @@ export default createStore({
       if(category){
         fetch(`http://localhost:8000/api/products/${category}`)
         .then(res => res.json())
-        .then(data => state.products= data.products)
+        .then(data => {
+          data.products.map(product => {
+            product.image.data.data = `data:${product.image.contentType};base64,` + product.image.data.data
+            return product
+          })
+          state.products = data.products
+        })
       }else{
         fetch('http://localhost:8000/api/products/getall')
         .then(res => res.json())
-        .then(data => state.products = data.products)
+        .then(data => {
+          data.products.map(product => {
+            const _arrayBufferToBase64 = (buffer) => {
+              let binary = '';
+              let bytes = [].slice.call(new Uint8Array(buffer));
+              bytes.forEach((b) => binary += String.fromCharCode(b));
+              return window.btoa(binary);
+            }
+            product.image.data.data = 'data:image/jpeg;base64,' + _arrayBufferToBase64(product.image.data.data)
+            return product
+          })
+          state.products = data.products
+        })
       }
     },
     getCategories(state){

@@ -2,8 +2,8 @@
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-align: center;
     color: #2c3e50;
+    text-align: center;
 }
 a{
     text-decoration: none;
@@ -53,13 +53,26 @@ li{
 .cart{
     background: #DCDCDC;
     padding: 20px;
-    height: 50%;
+    height: 500px;
     overflow: auto;
     width: auto;
     margin-top: 38px;
 }
 .category{
     margin-top: 38px;
+}
+.product{
+    margin-top: 38px;
+}
+.product:first{
+    margin-top: 0px;
+}
+.product img{
+    width: 50%;
+    height: auto;
+}
+.product-add{
+    margin-right: 10px;
 }
 .registerform{
     max-width: 420px;

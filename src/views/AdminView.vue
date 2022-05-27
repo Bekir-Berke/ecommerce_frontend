@@ -28,9 +28,30 @@
         </div>
 </div>
 <div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>Kategori Id</td>
+                    <td>Kategori Ad</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(category, index) in categories" :key="index">
+                    <td>{{category.categoryId}}</td>
+                    <td>{{category.categoryName}}</td>
+                    <td><button class="btn btn-danger" @click="deleteCategory(category._id)">Sil</button></td>
+                    <td><button class="btn btn-warning" @click="updateCategory(category)">Güncelle</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row">
     <div class="col-md-5"></div>
     <div class="col-md-2">
-        <button class="btn btn-success" @click="this.$router.push('/admin/add')">Ürün ekle</button>
+        <button class="btn btn-success product-add" @click="this.$router.push('/admin/product/add')">Ürün ekle</button>
+        <button class="btn btn-success" @click="this.$router.push('/admin/category/add')">Kategori Ekle</button>
     </div>
     <div class="col-md-5"></div>
 </div>
@@ -42,11 +63,12 @@ export default {
     name:'AdminView',
     computed: mapState({
        products: state => state.products,
+       categories: state => state.categories
     }),
     methods:{
         ...mapActions({
             getProducts:'getProducts',
-            deleteProduct:'deleteProduct'
+            getCategories:'getCategories',
         }),
         deleteProduct(id){
             const token = localStorage.getItem("token")
@@ -103,10 +125,26 @@ export default {
                     })
                 }
             })
-        }
+        },
+        deleteCategory(id){
+            const token = localStorage.getItem("token")
+            fetch(`http://localhost:8000/api/categories/delete/${id}`, {
+                method:'DELETE',
+                headers:{
+                    Authorization: `Bearer ${token}`
+                },
+            })
+            .then(res => res.json())
+            .then(data => {
+                if(data.category){
+                    this.$toast.success('kategori başarıyla silindi')
+                }
+            })
+        },
     },
     mounted(){
         this.getProducts()
+        this.getCategories()
     }
 }
 </script>

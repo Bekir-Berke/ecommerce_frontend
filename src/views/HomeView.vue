@@ -21,11 +21,5 @@ import Cart from '@/components/Cart.vue';
 export default {
   name: 'HomeView',
   components: { ProductList, CategoryList, Cart },
-  // mounted(){
-  //   this.$toast.success("Hocam 100 verin !!!!",{
-  //     position:"top",
-  //     duration:10000
-  //   })
-  // }
 }
 </script>

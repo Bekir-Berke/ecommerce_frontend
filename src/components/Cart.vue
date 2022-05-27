@@ -7,6 +7,7 @@
             <p>Fiyat {{item.totalPrice}} €</p>
             <button class="btn btn-danger" @click="this.removeItemQuantity(item)">-</button>
             <button class="btn btn-success" @click="this.addToCart(item)">+</button>
+            <button class="btn btn-danger" @click="this.removeFromCart(item)">Sepetten Sil</button>
           </li>
           <p v-if="cart.length > 0">Toplam : {{totalPrice}} €</p>
       </ul>
@@ -28,6 +29,7 @@ export default {
     methods:{
       ...mapActions({
         removeItemQuantity:'removeItemQuantity',
+        removeFromCart: 'removeFromCart',
         addToCart:'addToCart'
       })
     },

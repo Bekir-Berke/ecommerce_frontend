@@ -7,6 +7,7 @@ import ProductDetailView from '../views/ProductDetailView.vue'
 import AdminView from '../views/AdminView.vue'
 import NotFound from '../views/NotFound.vue'
 import ProductAdd from '../views/ProductAddView.vue'
+import CategoryAdd from '../views/CategoryAddView.vue'
 
 const routes = [
   {
@@ -65,10 +66,22 @@ const routes = [
     component:ProductDetailView
   },
   {
-    path:'/admin/add',
+    path:'/admin/product/add',
     name:'add',
     component:ProductAdd,
-
+    beforeEnter:(to, from, next) => {
+      const auth = localStorage.getItem("isAdmin")
+      return JSON.parse(auth) === true ? next() : next({path:'/login'})
+    }
+  },
+  {
+    path:'/admin/category/add',
+    name:'addCategory',
+    component:CategoryAdd,
+    beforeEnter:(to, from, next) => {
+      const auth = localStorage.getItem("isAdmin")
+      return JSON.parse(auth) === true ? next() : next({path:'/login'})
+    }
   }
 ]
 

@@ -4,7 +4,7 @@
           <h1>Store</h1>
       </router-link>
   </div>
-  <div class="col-md-6 input">
+  <div class="col-md-6 input" @change="handleChange()">
       <input type="text" placeholder="ürün adı giriniz">
   </div>
   <div class="col-md-3 links">
@@ -57,6 +57,9 @@ export default {
         handleLogout(){
             localStorage.clear()
         },
+        handleChange(){
+            console.log("changed")
+        }
     },
     mounted(){
         if(localStorage.getItem("token") !== null){

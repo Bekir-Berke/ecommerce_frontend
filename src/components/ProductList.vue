@@ -1,8 +1,9 @@
 <template>
-    <div>
+    <div class="product-list">
         <button class="btn btn-blue" @click="sortBy('azalan')">azalan fiyata göre sırala</button>
         <button class="btn btn-blue" @click="sortBy('artan')">artan fiyata göre sırala</button>
         <div v-for="(product, index) in products" :key="index" class="card product">
+        <img v-bind:src="product.image.data.data">
             <div class="card-body">
                 <router-link :to="{path:`/products/${product._id}`}">
                 <h5 class="card-title">{{product.productName}}</h5>

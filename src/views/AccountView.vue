@@ -5,7 +5,7 @@
             <router-link to="/admin">
                 <li v-if="admin === true" class="list-group-item">Yönetici paneline git</li>
             </router-link>
-            <li class="list-group-item">Siparişlerim</li>
+            <!-- <li class="list-group-item">Yorumlarım</li> -->
         </ul>
     </div>
     <div class="col-md-8">
